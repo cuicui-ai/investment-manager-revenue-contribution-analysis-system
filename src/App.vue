@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue';
 import { 
   BarChart3, Wallet, Activity, FileText, TrendingUp, LineChart, Package, 
-  AlertCircle, X, ChevronLeft, ArrowRight
+  AlertCircle, X, ChevronLeft, ArrowRight, Search, Plus, FileUp, FileDown, Download
 } from 'lucide-vue-next';
 import ProductCard from './components/ProductCard.vue';
 import TabButton from './components/TabButton.vue';
@@ -17,63 +17,106 @@ const TIAN_TIAN_YING_DATA = [
 ];
 
 const ATTRIBUTION_DATA = [
-  // 初金霞
-  { 
-    manager: '初金霞', buyDate: '20260401', endDate: '20260402', days: 2, 
-    totalPrincipal: 105263157.9, holdingPrincipal: 100000000, segmentGain: 120424.91, segmentWeighted: 5405405.405
+  {
+    manager: '初金霞',
+    summaries: {
+      accGain: 24364556.06,
+      maxDays: 35,
+      accWeighted: 4357404360,
+      accReturnRate: '0.1925%',
+      annualized: '2.0261%',
+      preFee: '1.9948%',
+      postFee: '1.6248%'
+    },
+    items: [
+      { buyDate: '20260408', endDate: '20260507', days: 30, totalPrincipal: 600210526.3, holdingPrincipal: 570200000, gain: 120807.4825, weighted: 462324324.3 },
+      { buyDate: '20260409', endDate: '20260507', days: 29, totalPrincipal: 1189473.684, holdingPrincipal: 1130000, gain: 1648.665474, weighted: 885675.6757 },
+      { buyDate: '20260413', endDate: '20260414', days: 2, totalPrincipal: 231578947.4, holdingPrincipal: 220000000, gain: 344622.97, weighted: 11891891.89 },
+      { buyDate: '20260413', endDate: '20260430', days: 17, totalPrincipal: 17557894.74, holdingPrincipal: 16680000, gain: 14054.14811, weighted: 8114594.595 },
+      { buyDate: '20260414', endDate: '20260507', days: 23, totalPrincipal: 577178947.4, holdingPrincipal: 548320000, gain: 594626.0491, weighted: 355667027 },
+      { buyDate: '20260416', endDate: '20260507', days: 21, totalPrincipal: 305378947.4, holdingPrincipal: 290110000, gain: 288698.2233, weighted: 172497837.8 }
+    ]
   },
-  { 
-    manager: '初金霞', buyDate: '20260401', endDate: '20260403', days: 3, 
-    totalPrincipal: 585163866.1, holdingPrincipal: 555905672.8, segmentGain: 52806.43662, segmentWeighted: 45073432.93
+  {
+    manager: '李炜菁',
+    summaries: {
+      accGain: 8389195.496,
+      maxDays: 35,
+      accWeighted: 4357404360,
+      accReturnRate: '0.1925%',
+      annualized: '2.0261%',
+      preFee: '1.9948%',
+      postFee: '1.6248%'
+    },
+    items: [
+      { buyDate: '20260403', endDate: '20260408', days: 5, totalPrincipal: 548918989.9, holdingPrincipal: 521473040.4, gain: 102777.9992, weighted: 89395378.35 },
+      { buyDate: '20260403', endDate: '20260414', days: 11, totalPrincipal: 316684032.6, holdingPrincipal: 300049831, gain: 129794.9995, weighted: 103148513.5 },
+      { buyDate: '20260403', endDate: '20260416', days: 13, totalPrincipal: 163620083.5, holdingPrincipal: 155439079.4, gain: 79160.04975, weighted: 62175631.74 }
+    ]
   },
-  { 
-    manager: '初金霞', buyDate: '20260401', endDate: '20260407', days: 7, 
-    totalPrincipal: 583083.7795, holdingPrincipal: 553929.5905, segmentGain: 152.4394964, segmentWeighted: 104797.4901
+  {
+    manager: '茹昊',
+    summaries: {
+      accGain: 8901890.646,
+      maxDays: 36,
+      accWeighted: 4649881454,
+      accReturnRate: '0.1914%',
+      annualized: '1.9581%',
+      preFee: '1.9302%',
+      postFee: '1.5602%'
+    },
+    items: [
+      { buyDate: '20260403', endDate: '20260507', days: 34, totalPrincipal: 400004226.9, holdingPrincipal: 380004015.5, gain: 14233.982, weighted: 369448348.4 }
+    ]
   },
-  // 李炜菁
-  { 
-    manager: '李炜菁', buyDate: '20260403', endDate: '20260408', days: 6, 
-    totalPrincipal: 548918989.9, holdingPrincipal: 521473040.4, segmentGain: 102777.9992, segmentWeighted: 89395378.35
-  },
-  { 
-    manager: '李炜菁', buyDate: '20260403', endDate: '20260414', days: 12, 
-    totalPrincipal: 316684032.6, holdingPrincipal: 300049831, segmentGain: 129794.9995, segmentWeighted: 103148513.5
-  },
-  // 茹昊
-  { 
-    manager: '茹昊', buyDate: '20260403', endDate: '20260507', days: 35, 
-    totalPrincipal: 400004226.9, holdingPrincipal: 380004015.5, segmentGain: 14233.982, segmentWeighted: 369448348.4
+  {
+    manager: '陈英华',
+    summaries: {
+      accGain: 4802636.809,
+      maxDays: 29,
+      accWeighted: 2948275862,
+      accReturnRate: '0.1629%',
+      annualized: '2.0697%',
+      preFee: '2.0362%',
+      postFee: '1.6662%'
+    },
+    items: [
+      { buyDate: '20260409', endDate: '20260507', days: 28, totalPrincipal: 1578947368, holdingPrincipal: 1500000000, gain: 2459118.414, weighted: 1500000000 },
+      { buyDate: '20260410', endDate: '20260507', days: 27, totalPrincipal: 1578947368, holdingPrincipal: 1500000000, gain: 2343518.395, weighted: 1448275862 }
+    ]
   }
 ];
 
 const TRANSACTION_DATA = [
-  { date: '2024-05-08', product: '天天盈43号', security: '江苏信托-宁聚8号', direction: '申购', price: 1.0452, amount: 5000000, status: '已成交', delegateStatus: '全部分配', manager: '初金霞' },
-  { date: '2024-05-07', product: '天天盈43号', security: '陕国投·鑫和1号', direction: '赎回', price: 1.0890, amount: 2000000, status: '已成交', delegateStatus: '全部分配', manager: '李炜菁' },
-  { date: '2024-05-06', product: '天天盈43号', security: '中铁信托-财富系列', direction: '申购', price: 1.0210, amount: 8000000, status: '部分成交', delegateStatus: '待分配', manager: '茹昊' },
-  { date: '2024-05-05', product: '天天盈43号', security: '中航信托-天璇系列', direction: '申购', price: 1.0560, amount: 3500000, status: '已成交', delegateStatus: '全部分配', manager: '陈英华' },
+  { date: '2026-05-06', direction: '申购', security: '陕国投·鑫和15号证券投资集合资金信托计划', amount: 141440000.00, manager: '孙绍雪' },
+  { date: '2026-04-30', direction: '申购', security: '中铁信托-锦信34号集合资金信托计划', amount: 110000000.00, manager: '许伟' },
+  { date: '2026-04-30', direction: '申购', security: '华润信托·光银星河13号集合资金信托计划', amount: 65000000.00, manager: '许伟' },
+  { date: '2026-04-29', direction: '申购', security: '陕国投·鑫和15号证券投资集合资金信托计划', amount: 28430000.00, manager: '孙绍雪' },
+  { date: '2026-04-28', direction: '申购', security: '中信信托和耀3号证券投资信托计划', amount: 175000000.00, manager: '许伟' },
+  { date: '2026-04-27', direction: '申购', security: '华润信托·光银星河13号集合资金信托计划', amount: 20000000.00, manager: '许伟' },
+  { date: '2026-04-24', direction: '申购', security: '江苏信托-宁聚4号集合资金信托计划', amount: 1000000000.00, manager: '初金霞' },
 ];
 
 const PRODUCT_NET_VALUE_LIST = [
-  { id: '1', name: '东方汇智-光大银行-博普量化2号集合资产管理计划', date: '2026-05-08', value: '1.2401' },
-  { id: '2', name: '中信保诚资管诚远19号资产管理产品', date: '2026-05-08', value: '1.0027' },
-  { id: '3', name: '中信信托和耀1号证券投资信托计划', date: '2026-05-08', value: '1.0080' },
-  { id: '4', name: '中信信托和耀2号证券投资信托计划', date: '2026-05-08', value: '1.0016' },
-  { id: '5', name: '中信信托和耀3号证券投资信托计划', date: '2026-05-08', value: '1.0006' },
-  { id: '6', name: '中信信托和耀4号证券投资信托计划', date: '2026-05-08', value: '1.0016' },
-  { id: '7', name: '中信信托和耀6号证券投资信托计划', date: '2026-05-08', value: '1.0029' },
-  { id: '8', name: '中信期货利率阿尔法4号', date: '2026-05-08', value: '1.1334' },
-  { id: '9', name: '中信期货固收对冲2号', date: '2026-05-08', value: '1.1495' },
-  { id: '10', name: '中信期货稳享利率1号集合资产管理计划', date: '2026-05-08', value: '1.0767' },
-  { id: '11', name: '中信期货阳光添利4号集合资产管理计划', date: '2026-05-08', value: '1.2202' },
-  { id: '12', name: '中信期货鸣石融辰1号集合资产管理计划', date: '2026-05-08', value: '1.3956' },
-  { id: '13', name: '中信证券基础设施1号集合资产管理计划', date: '2026-05-08', value: '1.1068' },
-  { id: '14', name: '中再资产-安心收益32号保险资产管理产品', date: '2026-05-08', value: '1.0639' },
-  { id: '15', name: '中再资产-安心收益40号保险资产管理产品', date: '2026-05-08', value: '1.0502' },
+  { name: '东方汇智-光大银行-博普量化2号集合资产管理计划', date: '2026-05-18', value: 1.2401 },
+  { name: '中信保诚资管诚远19号资产管理产品', date: '2026-05-18', value: 1.0027 },
+  { name: '中信信托和耀1号证券投资信托计划', date: '2026-05-18', value: 1.0080 },
+  { name: '中信信托和耀2号证券投资信托计划', date: '2026-05-18', value: 1.0016 },
+  { name: '中信信托和耀3号证券投资信托计划', date: '2026-05-18', value: 1.0006 },
+  { name: '中信信托和耀4号证券投资信托计划', date: '2026-05-18', value: 1.0016 },
+  { name: '中信信托和耀6号证券投资信托计划', date: '2026-05-18', value: 1.0029 },
 ];
 
 const MISSING_NET_VALUE_LIST = [
-  { id: 'm1', name: '中信保诚资管诚远19号资产管理产品', date: '2026-05-07', value: '缺失' },
-  { id: 'm2', name: '外贸信托-汇金5号', date: '2024-05-01', value: '缺失' },
+  { name: '华夏中短债债券A', remark: '缺失净值，查看缺失日期' },
+  { name: '汇添富丰润中短债E', remark: '缺失净值，查看缺失日期' },
+  { name: '景顺长城中短债债券F类', remark: '缺失净值，查看缺失日期' },
+  { name: '汇添富投资级信用债指数A', remark: '缺失净值，查看缺失日期' },
+];
+
+const MONEY_MARKET_MAINTENANCE_DATA = [
+  { name: '大家资产稳健智选8号固定收益类资产管理产品', amount: 260000000.00, marketValue: 260000000.00, gain: 10675.60 },
+  { name: '泰康资产纯泰货币12号资产管理产品', amount: 120000000.00, marketValue: 120000000.00, gain: 5046.00 },
 ];
 
 const PRODUCT_TYPE_DATA = [
@@ -88,13 +131,46 @@ const PRODUCT_TYPE_DATA = [
 
 // --- 状态 ---
 
+const startDate = ref('2026-04-01');
+const endDate = ref('2026-05-09');
+
+const handleStartDateChange = (e: Event) => {
+  const newDate = (e.target as HTMLInputElement).value;
+  if (newDate > endDate.value) {
+    // 如果开始日期晚于结束日期，将结束日期设为开始日期的后一天
+    const d = new Date(newDate);
+    d.setDate(d.getDate() + 1);
+    endDate.value = d.toISOString().split('T')[0];
+  }
+};
+
+const handleEndDateChange = (e: Event) => {
+  const newDate = (e.target as HTMLInputElement).value;
+  if (newDate < startDate.value) {
+    // 如果结束日期早于开始日期，重置为开始日期的后一天
+    const d = new Date(startDate.value);
+    d.setDate(d.getDate() + 1);
+    endDate.value = d.toISOString().split('T')[0];
+    alert('结束日期不能早于开始日期');
+  }
+};
+
 const currentView = ref<'selection' | 'detail'>('selection');
 const selectedProduct = ref<string | null>(null);
-const activeTab = ref<'summary' | 'attribution' | 'transactions' | 'net-value' | 'product-type'>('summary');
+const activeTab = ref<'summary' | 'attribution' | 'transactions' | 'net-value' | 'money-market'>('summary');
 const sortConfig = ref<{ key: string; direction: 'asc' | 'desc' } | null>(null);
 const netValueSubTab = ref<'value' | 'missing'>('value');
 const showNetValueAlert = ref(true);
 const editingProductType = ref<any | null>(null);
+const showMissingDatesModal = ref(false);
+const selectedMissingProduct = ref<string | null>(null);
+const missingDates = ref<string[]>([]);
+
+const txType = ref('申购');
+const txStartDate = ref('');
+const txEndDate = ref('');
+const txPlanName = ref('');
+const txManager = ref('');
 
 const handleProductClick = (productName: string) => {
   selectedProduct.value = productName;
@@ -107,25 +183,22 @@ const handleBack = () => {
   selectedProduct.value = null;
 };
 
-const sortedAttribution = computed(() => {
-  let items = [...ATTRIBUTION_DATA];
-  if (sortConfig.value) {
-    const { key, direction } = sortConfig.value;
-    items.sort((a: any, b: any) => {
-      if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
-      if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
-      return 0;
-    });
-  }
-  return items;
-});
-
-const requestSort = (key: string) => {
-  let direction: 'asc' | 'desc' = 'asc';
-  if (sortConfig.value && sortConfig.value.key === key && sortConfig.value.direction === 'asc') {
-    direction = 'desc';
-  }
-  sortConfig.value = { key, direction };
+const handleViewMissingDates = (productName: string) => {
+  selectedMissingProduct.value = productName;
+  // 模拟一些缺失日期
+  missingDates.value = [
+    '2026-05-15',
+    '2026-05-14',
+    '2026-05-13',
+    '2026-05-12',
+    '2026-05-11',
+    '2026-05-08',
+    '2026-05-07',
+    '2026-05-06',
+    '2026-05-05',
+    '2026-05-04'
+  ];
+  showMissingDatesModal.value = true;
 };
 </script>
 
@@ -201,9 +274,24 @@ const requestSort = (key: string) => {
                 <div class="h-4 w-px bg-slate-200" />
                 <h2 class="text-xl font-bold text-slate-900 tracking-tight">{{ selectedProduct }}</h2>
                 <div class="h-4 w-px bg-slate-200" />
-                <p class="text-slate-500 font-medium text-xs opacity-70">
-                  分析区间: <span class="font-bold text-slate-700">2026-04-01 至 2026-05-09</span>
-                </p>
+                <div class="flex items-center gap-2 text-slate-500 font-medium text-xs">
+                  <span>分析区间:</span>
+                  <div class="flex items-center gap-1 bg-slate-50 px-2 py-1 rounded-md border border-slate-200">
+                    <input 
+                      type="date" 
+                      v-model="startDate" 
+                      @change="handleStartDateChange"
+                      class="bg-transparent border-none focus:ring-0 cursor-pointer font-bold text-slate-700 outline-none"
+                    />
+                    <span class="text-slate-300">至</span>
+                    <input 
+                      type="date" 
+                      v-model="endDate" 
+                      @change="handleEndDateChange"
+                      class="bg-transparent border-none focus:ring-0 cursor-pointer font-bold text-slate-700 outline-none"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -239,9 +327,9 @@ const requestSort = (key: string) => {
                 <template #icon><LineChart class="w-4 h-4" /></template>
               </TabButton>
               <TabButton 
-                :active="activeTab === 'product-type'" 
-                @click="activeTab = 'product-type'"
-                label="产品类型维护"
+                :active="activeTab === 'money-market'" 
+                @click="activeTab = 'money-market'"
+                label="货币产品收益维护"
               >
                 <template #icon><Package class="w-4 h-4" /></template>
               </TabButton>
@@ -299,76 +387,276 @@ const requestSort = (key: string) => {
                   </div>
                 </div>
 
-                <div v-else-if="activeTab === 'attribution'" key="attr" class="bg-white p-6 rounded-xl border">
-                  <div class="flex justify-between items-center mb-6">
-                    <h3 class="font-bold">收益归因明细</h3>
-                    <button @click="requestSort('days')" class="text-xs bg-slate-100 px-3 py-1 rounded">按时间排序</button>
-                  </div>
-                  <div class="overflow-x-auto text-[11px]">
-                    <table class="w-full">
-                      <thead class="bg-slate-50">
+                <div v-else-if="activeTab === 'attribution'" key="attr" class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-[10px]">
+                      <thead class="bg-[#F2EDF7] border-b border-slate-200 text-[#6D1786] font-bold">
                         <tr>
-                          <th class="p-2 text-left">经理</th><th class="p-2">买入</th><th class="p-2">天数</th><th class="p-2 text-right">本金</th><th class="p-2 text-right">收益</th>
+                          <th class="px-2 py-3 border-r border-slate-200">投资经理</th>
+                          <th class="px-2 py-3 border-r border-slate-200">买入日期</th>
+                          <th class="px-2 py-3 border-r border-slate-200">结束日期</th>
+                          <th class="px-2 py-3 border-r border-slate-200">持有时间(天)</th>
+                          <th class="px-2 py-3 border-r border-slate-200">总本金(元)</th>
+                          <th class="px-2 py-3 border-r border-slate-200">持仓本金(元)</th>
+                          <th class="px-2 py-3 border-r border-slate-200">收益(元)</th>
+                          <th class="px-2 py-3 border-r border-slate-200">按持有期加权本金</th>
+                          <th class="px-2 py-3 border-r border-slate-200">累计收益(元)</th>
+                          <th class="px-2 py-3 border-r border-slate-200 text-center">最大持有时间(天)</th>
+                          <th class="px-2 py-3 border-r border-slate-200">累计按持有期加权本金</th>
+                          <th class="px-2 py-3 border-r border-slate-200">累计收益率</th>
+                          <th class="px-2 py-3 border-r border-slate-200 text-center">年化收益率</th>
+                          <th class="px-2 py-3 border-r border-slate-200">对应费前年华收益率</th>
+                          <th class="px-2 py-3">对应费后年华收益率</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr v-for="(a, i) in sortedAttribution" :key="i" class="border-t">
-                          <td class="p-2">{{ a.manager }}</td><td class="p-2">{{ a.buyDate }}</td><td class="p-2 text-center">{{ a.days }}</td>
-                          <td class="p-2 text-right">{{ a.totalPrincipal.toLocaleString() }}</td><td class="p-2 text-right text-red-600">{{ a.segmentGain.toFixed(2) }}</td>
+                      <tbody class="divide-y divide-slate-100">
+                        <template v-for="(group, gIdx) in ATTRIBUTION_DATA" :key="gIdx">
+                          <tr v-for="(item, iIdx) in group.items" :key="iIdx" class="hover:bg-slate-50/50 transition-colors">
+                            <td v-if="iIdx === 0" :rowspan="group.items.length" class="px-2 py-4 font-bold text-slate-800 border-r border-slate-200 bg-slate-50/30">
+                              {{ group.manager }}
+                            </td>
+                            <td class="px-2 py-4 text-slate-600 border-r border-slate-100">{{ item.buyDate }}</td>
+                            <td class="px-2 py-4 text-slate-600 border-r border-slate-100">{{ item.endDate }}</td>
+                            <td class="px-2 py-4 text-center text-slate-600 border-r border-slate-100">{{ item.days }}</td>
+                            <td class="px-2 py-4 text-right font-mono text-slate-700 border-r border-slate-100">{{ item.totalPrincipal.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) }}</td>
+                            <td class="px-2 py-4 text-right font-mono text-slate-700 border-r border-slate-100">{{ item.holdingPrincipal.toLocaleString() }}</td>
+                            <td class="px-2 py-4 text-right font-mono text-red-600 border-r border-slate-100">{{ item.gain.toLocaleString(undefined, { minimumFractionDigits: 4, maximumFractionDigits: 4 }) }}</td>
+                            <td class="px-2 py-4 text-right font-mono text-slate-700 border-r border-slate-100">{{ item.weighted.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 4 }) }}</td>
+                            
+                            <td v-if="iIdx === 0" :rowspan="group.items.length" class="px-2 py-4 text-right font-mono text-red-600 border-r border-slate-200">
+                              {{ group.summaries.accGain.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 }) }}
+                            </td>
+                            <td v-if="iIdx === 0" :rowspan="group.items.length" class="px-2 py-4 text-center text-slate-600 border-r border-slate-200">
+                              {{ group.summaries.maxDays }}
+                            </td>
+                            <td v-if="iIdx === 0" :rowspan="group.items.length" class="px-2 py-4 text-right font-mono text-slate-700 border-r border-slate-200">
+                              {{ group.summaries.accWeighted.toLocaleString() }}
+                            </td>
+                            <td v-if="iIdx === 0" :rowspan="group.items.length" class="px-2 py-4 text-right text-red-600 border-r border-slate-200">
+                              {{ group.summaries.accReturnRate }}
+                            </td>
+                            <td v-if="iIdx === 0" :rowspan="group.items.length" class="px-2 py-4 text-center text-red-600 border-r border-slate-200">
+                              {{ group.summaries.annualized }}
+                            </td>
+                            <td v-if="iIdx === 0" :rowspan="group.items.length" class="px-2 py-4 text-right text-red-600 border-r border-slate-200">
+                              {{ group.summaries.preFee }}
+                            </td>
+                            <td v-if="iIdx === 0" :rowspan="group.items.length" class="px-2 py-4 text-right text-red-600">
+                              {{ group.summaries.postFee }}
+                            </td>
+                          </tr>
+                        </template>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div v-else-if="activeTab === 'transactions'" key="tx" class="flex flex-col gap-4">
+                  <!-- Tabs for Type -->
+                  <div class="flex items-center justify-between border-b border-slate-200">
+                    <div class="flex">
+                      <button 
+                        @click="txType = '申购'" 
+                        :class="['px-6 py-2 text-sm font-bold transition-all border-b-2', txType === '申购' ? 'border-[#6D1786] text-[#6D1786]' : 'border-transparent text-slate-500 hover:text-slate-700']"
+                      >
+                        申购
+                      </button>
+                      <button 
+                        @click="txType = '赎回'" 
+                        :class="['px-6 py-2 text-sm font-bold transition-all border-b-2', txType === '赎回' ? 'border-[#6D1786] text-[#6D1786]' : 'border-transparent text-slate-500 hover:text-slate-700']"
+                      >
+                        赎回
+                      </button>
+                    </div>
+                    
+                    <div class="mb-2">
+                      <button class="bg-[#EAB308] text-white px-4 py-1.5 rounded hover:bg-yellow-600 flex items-center gap-1 font-bold text-xs">
+                        <FileUp class="w-3.5 h-3.5" /> 导入
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Table -->
+                  <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+                    <table class="w-full text-left border-collapse text-[13px]">
+                      <thead class="bg-[#F2EDF7] text-[#6D1786] font-bold border-b border-slate-200">
+                        <tr>
+                          <th class="px-4 py-3 w-10 text-center"><input type="checkbox" class="rounded border-slate-300 text-[#6D1786] focus:ring-[#6D1786]" /></th>
+                          <th class="px-4 py-3 border-r border-slate-100">业务日期</th>
+                          <th class="px-4 py-3 border-r border-slate-100">业务类型</th>
+                          <th class="px-4 py-3 border-r border-slate-100">投放资管计划名称</th>
+                          <th class="px-4 py-3 text-right border-r border-slate-100">金额 (元)</th>
+                          <th class="px-4 py-3">投资经理</th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-slate-100">
+                        <tr v-for="(t, i) in TRANSACTION_DATA" :key="i" class="hover:bg-slate-50/50 transition-colors">
+                          <td class="px-4 py-3 text-center"><input type="checkbox" class="rounded border-slate-300 text-[#6D1786] focus:ring-[#6D1786]" /></td>
+                          <td class="px-4 py-4 text-slate-600 font-medium">{{ t.date }}</td>
+                          <td class="px-4 py-4 text-slate-600">{{ t.direction }}</td>
+                          <td class="px-4 py-4 font-bold text-slate-800">{{ t.security }}</td>
+                          <td class="px-4 py-4 text-right font-mono text-slate-700">{{ t.amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+                          <td class="px-4 py-4 text-slate-600">{{ t.manager }}</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
 
-                <div v-else-if="activeTab === 'transactions'" key="tx" class="bg-white p-6 rounded-xl border">
-                  <h3 class="font-bold mb-4">交易流水</h3>
-                  <table class="w-full text-[12px]">
-                    <thead class="bg-[#F2EDF7]">
-                      <tr><th class="p-3 text-left">日期</th><th class="p-3 text-left">名称</th><th class="p-3">方向</th><th class="p-3 text-right">金额</th></tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(t, i) in TRANSACTION_DATA" :key="i" class="border-b">
-                        <td class="p-3">{{ t.date }}</td><td class="p-3 font-medium">{{ t.security }}</td>
-                        <td class="p-3 text-center"><span class="px-2 py-0.5 bg-purple-50 text-purple-600 rounded">{{ t.direction }}</span></td>
-                        <td class="p-3 text-right">{{ t.amount.toLocaleString() }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <div v-else-if="activeTab === 'net-value'" key="nv" class="space-y-4">
-                  <div class="flex gap-4 border-b">
-                    <button @click="netValueSubTab = 'value'" :class="['p-2', netValueSubTab === 'value' ? 'border-b-2 border-purple-600 text-purple-600' : '']">产品净值</button>
-                    <button @click="netValueSubTab = 'missing'" :class="['p-2', netValueSubTab === 'missing' ? 'border-b-2 border-purple-600 text-purple-600' : '']">缺失净值</button>
+                <div v-else-if="activeTab === 'net-value'" key="nv" class="flex flex-col gap-4">
+                  <div class="flex border-b border-slate-200">
+                    <button 
+                      @click="netValueSubTab = 'value'" 
+                      :class="['px-6 py-2 text-sm font-bold transition-all border-b-2', netValueSubTab === 'value' ? 'border-[#6D1786] text-[#6D1786]' : 'border-transparent text-slate-500 hover:text-slate-700']"
+                    >
+                      产品净值
+                    </button>
+                    <button 
+                      @click="netValueSubTab = 'missing'" 
+                      :class="['px-6 py-2 text-sm font-bold transition-all border-b-2', netValueSubTab === 'missing' ? 'border-[#6D1786] text-[#6D1786]' : 'border-transparent text-slate-500 hover:text-slate-700']"
+                    >
+                      缺失净值
+                    </button>
                   </div>
-                  <table class="w-full bg-white border text-[13px]">
-                    <thead class="bg-[#F2EDF7]">
-                      <tr><th class="p-3 text-left">名称</th><th class="p-3">日期</th><th class="p-3 text-right">值</th></tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="p in (netValueSubTab === 'value' ? PRODUCT_NET_VALUE_LIST : MISSING_NET_VALUE_LIST)" :key="p.id" class="border-t">
-                        <td class="p-3">{{ p.name }}</td><td class="p-3 text-center">{{ p.date }}</td><td class="p-3 text-right">{{ p.value }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+
+                  <div v-if="netValueSubTab === 'value'" class="space-y-4">
+                    <!-- Filter Area -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 flex flex-wrap items-center gap-4 text-xs font-medium">
+                      <div class="flex items-center gap-2">
+                        <span class="text-slate-500">资管计划名称:</span>
+                        <input 
+                          type="text" 
+                          placeholder="请输入资管计划名称" 
+                          class="bg-white border border-slate-200 rounded px-3 py-1.5 w-48 outline-none focus:ring-1 focus:ring-[#6D1786]/20" 
+                        />
+                      </div>
+                      <button class="bg-white border border-slate-200 text-slate-600 px-4 py-1.5 rounded hover:bg-slate-50 flex items-center gap-1 font-bold">
+                        <Search class="w-3.5 h-3.5" /> 搜索
+                      </button>
+
+                      <div class="flex items-center gap-2 ml-auto">
+                        <button class="bg-[#6D1786] text-white px-4 py-1.5 rounded hover:bg-[#5a136f] flex items-center gap-1 font-bold">
+                          <Plus class="w-3.5 h-3.5" /> 新增
+                        </button>
+                        <button class="bg-[#EAB308] text-white px-4 py-1.5 rounded hover:bg-yellow-600 flex items-center gap-1 font-bold">
+                          <FileUp class="w-3.5 h-3.5" /> 导入
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="flex">
+                      <button class="bg-[#6D1786] text-white px-3 py-1.5 rounded text-[10px] font-bold hover:bg-[#5a136f] flex items-center gap-1 shrink-0">
+                        <Download class="w-3 h-3" /> 下载模板
+                      </button>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+                      <table class="w-full text-left border-collapse text-[13px]">
+                        <thead class="bg-[#F2EDF7] text-[#6D1786] font-bold border-b border-slate-200">
+                          <tr>
+                            <th class="px-4 py-3 w-10 text-center"><input type="checkbox" class="rounded border-slate-300 text-[#6D1786] focus:ring-[#6D1786]" /></th>
+                            <th class="px-4 py-3 border-r border-slate-100">资管计划产品名称</th>
+                            <th class="px-4 py-3 border-r border-slate-100">最新净值日期</th>
+                            <th class="px-4 py-3 text-right">最新净值</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                          <tr v-for="(p, i) in PRODUCT_NET_VALUE_LIST" :key="i" class="hover:bg-slate-50/50 transition-colors">
+                            <td class="px-4 py-3 text-center"><input type="checkbox" class="rounded border-slate-300 text-[#6D1786] focus:ring-[#6D1786]" /></td>
+                            <td class="px-4 py-3 text-slate-700">{{ p.name }}</td>
+                            <td class="px-4 py-3 text-slate-600">{{ p.date }}</td>
+                            <td class="px-4 py-3 text-right font-mono text-slate-800">{{ p.value.toFixed(4) }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div v-else-if="netValueSubTab === 'missing'" class="space-y-4">
+                    <!-- Filter Area -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 flex flex-wrap items-center gap-4 text-xs font-medium">
+                      <div class="flex items-center gap-2">
+                        <span class="text-slate-500">资管计划名称:</span>
+                        <input 
+                          type="text" 
+                          placeholder="请输入资管计划名称" 
+                          class="bg-white border border-slate-200 rounded px-3 py-1.5 w-48 outline-none focus:ring-1 focus:ring-[#6D1786]/20" 
+                        />
+                      </div>
+                      <button class="bg-white border border-slate-200 text-slate-600 px-4 py-1.5 rounded hover:bg-slate-50 flex items-center gap-1 font-bold">
+                        <Search class="w-3.5 h-3.5" /> 搜索
+                      </button>
+
+                      <div class="flex items-center gap-2 ml-auto">
+                        <button class="bg-[#EAB308] text-white px-4 py-1.5 rounded hover:bg-yellow-600 flex items-center gap-1 font-bold">
+                          <FileUp class="w-3.5 h-3.5" /> 批量导入
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+                      <table class="w-full text-left border-collapse text-[13px]">
+                        <thead class="bg-[#F2EDF7] text-[#6D1786] font-bold border-b border-slate-200">
+                          <tr>
+                            <th class="px-4 py-3 w-10 text-center"><input type="checkbox" class="rounded border-slate-300 text-[#6D1786] focus:ring-[#6D1786]" /></th>
+                            <th class="px-4 py-3 border-r border-slate-100">资管计划产品名称</th>
+                            <th class="px-4 py-3 text-left">备注</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                          <tr v-for="(p, i) in MISSING_NET_VALUE_LIST" :key="i" class="hover:bg-slate-50/50 transition-colors">
+                            <td class="px-4 py-3 text-center"><input type="checkbox" class="rounded border-slate-300 text-[#6D1786] focus:ring-[#6D1786]" /></td>
+                            <td class="px-4 py-3 text-slate-700">{{ p.name }}</td>
+                            <td class="px-4 py-3 text-red-600 cursor-pointer hover:underline" @click="handleViewMissingDates(p.name)">{{ p.remark }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
 
-                <div v-else-if="activeTab === 'product-type'" key="pt" class="bg-white border rounded">
-                  <table class="w-full text-[12px]">
-                    <thead class="bg-[#F2EDF7]">
-                      <tr><th class="p-3 text-left">代码</th><th class="p-3 text-left">名称</th><th class="p-3">类型</th><th class="p-3">操作</th></tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(p, i) in PRODUCT_TYPE_DATA" :key="i" class="border-t">
-                        <td class="p-3">{{ p.code }}</td><td class="p-3 font-medium">{{ p.name }}</td><td class="p-3">{{ p.type }}</td>
-                        <td class="p-3 text-center"><button @click="editingProductType = p" class="text-purple-600">维护</button></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div v-else-if="activeTab === 'money-market'" key="mm" class="flex flex-col gap-4">
+                  <!-- Money Market Maintenance Section -->
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-slate-800">货币产品收益维护</h3>
+                    <div class="flex items-center gap-2 bg-purple-50 px-3 py-1.5 rounded-lg border border-purple-100">
+                      <FileText class="w-4 h-4 text-[#6D1786]" />
+                      <span class="text-xs font-bold text-[#6D1786]">估值表日期：2026-05-19</span>
+                    </div>
+                  </div>
+
+                  <div class="bg-white p-4 rounded-xl border border-slate-200 flex flex-wrap items-center gap-4 text-xs font-medium">
+                    <div class="flex items-center gap-2 ml-auto">
+                      <button class="bg-[#6D1786] text-white px-4 py-1.5 rounded hover:bg-[#5a136f] flex items-center gap-1 font-bold">
+                        <FileUp class="w-3.5 h-3.5" /> 导入最新产品估值表
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+                    <table class="w-full text-left border-collapse text-[13px]">
+                      <thead class="bg-[#F2EDF7] text-[#6D1786] font-bold border-b border-slate-200">
+                        <tr>
+                          <th class="px-4 py-3 border-r border-slate-100">货币产品名称</th>
+                          <th class="px-4 py-3 text-right border-r border-slate-100">持有数量</th>
+                          <th class="px-4 py-3 text-right border-r border-slate-100">市值 (元)</th>
+                          <th class="px-4 py-3 text-right">收益 (元)</th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-slate-100 text-slate-700">
+                        <tr v-for="(p, i) in MONEY_MARKET_MAINTENANCE_DATA" :key="i" class="hover:bg-slate-50/50 transition-colors">
+                          <td class="px-4 py-3 font-medium">{{ p.name }}</td>
+                          <td class="px-4 py-3 text-right font-mono">{{ p.amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+                          <td class="px-4 py-3 text-right font-mono">{{ p.marketValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+                          <td class="px-4 py-3 text-right font-mono text-red-600">{{ p.gain.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </Transition>
             </div>
+
           </div>
 
           <div v-else class="bg-white p-20 rounded-3xl border border-dashed text-center">
@@ -380,6 +668,64 @@ const requestSort = (key: string) => {
         </div>
       </Transition>
     </main>
+
+    <Transition name="fade">
+      <div v-if="showMissingDatesModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-300">
+          <div class="bg-[#F2EDF7] px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2 text-[#6D1786]">
+              <AlertCircle class="w-5 h-5" />
+              <h3 class="font-bold tracking-tight">净值缺失日期详情</h3>
+            </div>
+            <button @click="showMissingDatesModal = false" class="text-slate-400 hover:text-slate-600 transition-colors">
+              <X class="w-5 h-5" />
+            </button>
+          </div>
+          
+          <div class="p-6">
+            <div class="mb-6">
+              <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">资管计划产品名称</label>
+              <div class="text-sm font-bold text-slate-800 leading-tight">
+                {{ selectedMissingProduct }}
+              </div>
+            </div>
+
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">缺失日期列表</label>
+                <span class="text-[10px] bg-red-50 text-red-600 px-2 py-0.5 rounded-full font-bold">共 {{ missingDates.length }} 个交易日</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto pr-1">
+                <div 
+                  v-for="date in missingDates" 
+                  :key="date"
+                  class="bg-slate-50 border border-slate-100 px-3 py-2 rounded-xl text-xs font-mono text-slate-600 flex items-center justify-between group hover:border-[#6D1786]/20 hover:bg-white transition-all"
+                >
+                  {{ date }}
+                  <span class="w-1.5 h-1.5 rounded-full bg-red-400 group-hover:animate-pulse"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 flex gap-3">
+              <button 
+                @click="showMissingDatesModal = false" 
+                class="flex-1 py-3 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-2xl text-xs font-bold transition-all"
+              >
+                我知道了
+              </button>
+              <button 
+                @click="showMissingDatesModal = false" 
+                class="flex-1 py-3 px-4 bg-[#6D1786] hover:bg-[#5a136f] text-white rounded-2xl text-xs font-bold shadow-lg shadow-[#6D1786]/20 transition-all flex items-center justify-center gap-2"
+              >
+                <FileUp class="w-3.5 h-3.5" />
+                立即补录
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Transition>
 
     <Transition name="fade">
       <div v-if="editingProductType" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
