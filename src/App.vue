@@ -535,9 +535,6 @@ const handleViewMissingDates = (productName: string) => {
                       </button>
 
                       <div class="flex items-center gap-2 ml-auto">
-                        <button class="bg-[#6D1786] text-white px-4 py-1.5 rounded hover:bg-[#5a136f] flex items-center gap-1 font-bold">
-                          <Plus class="w-3.5 h-3.5" /> 新增
-                        </button>
                         <button class="bg-[#EAB308] text-white px-4 py-1.5 rounded hover:bg-yellow-600 flex items-center gap-1 font-bold">
                           <FileUp class="w-3.5 h-3.5" /> 导入
                         </button>
